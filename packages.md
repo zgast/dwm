@@ -1,0 +1,5 @@
+rofi
+scrot
+arandr
+lxappeariance
+
