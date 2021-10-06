@@ -36,6 +36,8 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ NULL, 	  NULL,       "Discord",  1 << 7,		0,           -1 },
+
 };
 
 /* layout(s) */
@@ -64,13 +66,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL, "" };
 static const char *termcmd[]  = { "tilix", NULL };
 
 static Key keys[] = {
 /* modifier     key         function    argument */
-	{ 0,  XK_Print,   spawn,      SHCMD("sleep 1s;scrot --select ~/Screenshot/%b%d::%H%M%S.png") },
-	{ MODKEY,                       XK_p,      spawn,          SHCMD("rofi -modi drun -show drun") },
+	{ 0,  XK_Print,   spawn,      SHCMD("scrot --select ~/Screenshot/%s_%d.%m_%R.png") },
+	{ ShiftMask,  XK_Print,   spawn,      SHCMD("scrot -d ~/Screenshot/%s_%d.%m_%R.png") },
+	{ ControlMask,  XK_Print,   spawn,      SHCMD("scrot -u ~/Screenshot/%s_%d.%m_%R.png") },
+	{ MODKEY,                       XK_p,      spawn,          SHCMD("rofi -modi drun -show drun -hide-scrollbar -show-icons -drun-icon-theme") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
