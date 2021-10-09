@@ -5,7 +5,9 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "ribbon:size=11" };
+
+static const char *fonts[]          = { "FontAwesome:size=11.15",
+										"ribbon:size=11.15"};
 static const char dmenufont[]       = "ribbon:size=11";
 static const char col_gray1[]       = "#73a9ff";
 static const char col_gray2[]       = "#eb4034";
@@ -35,7 +37,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefofx",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ NULL, 	  NULL,       "Discord",  1 << 7,		0,           -1 },
 
 };
