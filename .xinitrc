@@ -1,8 +1,8 @@
-xset dpms 60 120 180
-xss -lock slock
-
+# xset dpms 60 120 180
 feh --bg-scale  /home/markus/Nextcloud/pics/backgrounds/tree.jpg
 
+picom -f &
+# xss-lock -- slock &
 
 
 while true; do
@@ -20,23 +20,6 @@ while true; do
 sleep 1s
 done &
 
-#while true; do
-     
-#    if [ $(acpi | awk '{print $4}' | sed s/%,//) -lt 5 ]
-#    then
-#        brightnessctl set 30
-#    fi
-
-#    sleep 1s		
-#done &
+xmodmap /home/markus/.xmodmap-`uname -n`
 
 exec dwm
-
-
-
-
-
-
-
-
-

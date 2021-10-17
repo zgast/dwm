@@ -1,0 +1,4 @@
+#!/bin/bash
+SECS = date +%s
+
+import ~/Screenshots/$/(SECate +%d.%m.%y_%H:%M).png

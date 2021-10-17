@@ -2,6 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 0;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -15,8 +16,8 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 
-static const char fg[]       = "#6ba4ff";
-static const char bg[]       = "#000000";
+static const char fg[]       = "#8fbcbb";
+static const char bg[]       = "#2e3440";
 static const char *colors[][3]      = {
 	/*               fg  bg  border   */
 	[SchemeNorm] = { fg, bg, bg },
@@ -73,8 +74,7 @@ static const char *termcmd[]  = { "tilix", NULL };
 
 static Key keys[] = {
 /* modifier     key         function    argument */
-	{ 0,  XK_Print,   spawn,      SHCMD("scrot --select ~/Screenshot/%s_%d.%m_%R.png") },
-	{ ShiftMask,  XK_Print,   spawn,      SHCMD("scrot -d ~/Screenshot/%s_%d.%m_%R.png") },
+	{ 0,  XK_Print,   spawn,      SHCMD("import ~/Screenshot/$(date +%s)_$(date +%d.%m.%y_%H:%M).png") },
 	{ ControlMask,  XK_Print,   spawn,      SHCMD("scrot -u ~/Screenshot/%s_%d.%m_%R.png") },
 	{ MODKEY,                       XK_p,      spawn,          SHCMD("rofi -modi drun -show drun -hide-scrollbar -show-icons -drun-icon-theme") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
@@ -83,7 +83,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_v,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_h,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_y,      spawn,     SHCMD("slock") },
+	{ MODKEY,                       XK_y,      spawn,     SHCMD("env XSECURELOCK_PASSWORD_PROMPT=asterisks env XSECURELOCK_SHOW_DATETIME=1 env XSECURELOCK_SAVER=saver_mpv env XSECURELOCK_LIST_VIDEOS_COMMAND='feh --zoom=fill -F ~/Nextcloud/pics/backgrounds/space.jpg' xsecurelock") },
 	{ MODKEY,                       XK_minus,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_plus,      setmfact,       {.f = +0.05} },
 	{ MODKEY,             			XK_Tab,    shiftviewclients, { .i = +1 } },
