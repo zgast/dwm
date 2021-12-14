@@ -3,13 +3,19 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 0;        /* gap pixel between windows */
+static const unsigned int gappx     = 10;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 
 static const char *fonts[]          = { "FontAwesome:size=11.15",
 										"ribbon:size=11.15"};
+
+static const int usealtbar          = 1;        /* 1 means use non-dwm status bar */
+static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
+static const char *altbarcmd        = "/home/markus/Documents/GitHub/dwm/polybar-themes/simple/forest/launch.sh"; /* Alternate bar launch command */
+
+
 static const char dmenufont[]       = "ribbon:size=11";
 static const char col_gray1[]       = "#73a9ff";
 static const char col_gray2[]       = "#eb4034";
@@ -17,8 +23,8 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 
-static const char fg[]       = "#8fbcbb";
-static const char bg[]       = "#2e3440";
+static const char fg[]       = "#000000";
+static const char bg[]       = "#728275";
 static const char *colors[][3]      = {
 	/*               fg  bg  border   */
 	[SchemeNorm] = { fg, bg, bg },
@@ -38,7 +44,6 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ NULL, 	  NULL,       "Discord",  1 << 7,		0,           -1 },
 
