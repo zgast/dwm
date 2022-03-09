@@ -24,7 +24,7 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 
 static const char fg[]       = "#000000";
-static const char bg[]       = "#728275";
+static const char bg[]       = "#8198e4";
 static const char *colors[][3]      = {
 	/*               fg  bg  border   */
 	[SchemeNorm] = { fg, bg, bg },
@@ -82,20 +82,32 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL, "" };
 static const char *termcmd[]  = { "tilix", NULL };
 
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+
+
 static Key keys[] = {
 /* modifier     key         function    argument */
-	{ 0,  XK_Print,   spawn,      SHCMD("import ~/Screenshot/$(date +%s)_$(date +%d.%m.%y_%H:%M).png") },
-	{ ControlMask,  XK_Print,   spawn,      SHCMD("scrot -u ~/Screenshot/%s_%d.%m_%R.png") },
+	{ 0,  							XK_Print,   spawn,      SHCMD("bash ~/Documents/GitHub/dwm/scripts/screenshot.sh") },
+	{ ControlMask,  				XK_Print,   spawn,      SHCMD("scrot -u ~/Screenshot/%s_%d.%m_%R.png") },
 	{ MODKEY,                       XK_p,      spawn,          SHCMD("rofi -modi drun -show drun -hide-scrollbar -show-icons -drun-icon-theme") },
+	{ MODKEY,                       XK_F9,      spawn,          SHCMD("xclip -i -selection c ~/Documents/GitHub/dwm/scripts/pipe") },
+	{ MODKEY,                       XK_F10,      spawn,          SHCMD("xclip -i -selection c ~/Documents/GitHub/dwm/scripts/greater") },
+	{ MODKEY,                       XK_F11,      spawn,          SHCMD("xclip -i -selection c ~/Documents/GitHub/dwm/scripts/smaller") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ 0,                       		XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+	{ 0,                       		XF86XK_AudioMute, spawn, {.v = mutevol } },
+	{ 0,                       		XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_v,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_h,      incnmaster,     {.i = -1 } },
+	
     { 0, 							XF86XK_MonBrightnessUp,  spawn,          {.v = brupcmd} },
     { 0, 							XF86XK_MonBrightnessDown, spawn,          {.v = brdowncmd} },
-	{ MODKEY,                       XK_y,      spawn,     SHCMD("env XSECURELOCK_PASSWORD_PROMPT=asterisks env XSECURELOCK_SHOW_DATETIME=1 env XSECURELOCK_SAVER=saver_mpv env XSECURELOCK_LIST_VIDEOS_COMMAND='feh --zoom=fill -F ~/Nextcloud/pics/backgrounds/space.jpg' xsecurelock") },
+	{ MODKEY,                       XK_y,      spawn,     SHCMD("env XSECURELOCK_PASSWORD_PROMPT=asterisks env XSECURELOCK_SHOW_DATETIME=1 env XSECURELOCK_SAVER=saver_mpv env XSECURELOCK_LIST_VIDEOS_COMMAND='feh --zoom=fill -F ~/seafile/MyLibrary/pics/backgrounds/space.jpg' xsecurelock") },
 	{ MODKEY,                       XK_minus,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_plus,      setmfact,       {.f = +0.05} },
 	{ MODKEY,             			XK_Tab,    shiftviewclients, { .i = +1 } },
