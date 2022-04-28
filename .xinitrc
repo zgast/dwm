@@ -17,7 +17,24 @@ while true; do
     MEM="$(echo -e "\uf1c0") $(free -m | grep '^Mem' | awk '{print  $3 " MB / " $2" MB"}')"
     SOUND="$(echo -e "\uf028") $(amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }')"
     BRIGHTNESS="$(echo -e " \uf185") $(echo -e "$((($(cat /sys/class/backlight/amdgpu_bl0/actual_brightness) / 2.55)))"  | grep -o -P "\b\d{1,3}\b")%"
-    AKKU="$(echo -e "\uf241") $(acpi | awk '{print $4}' | sed s/,//)"
+   
+    CURR_AKKU=$(acpi | awk '{print $4}' | sed s/,// | sed s/%//)
+    if [ $CURR_AKKU -le "20" ]
+    then
+        AKKU="$(echo -e "\uf244") $CURR_AKKU %"
+    fi
+    if [ $CURR_AKKU -gt "20" ]
+    then
+        AKKU="$(echo -e "\uf241") $CURR_AKKU %"
+    fi
+    if [ $CURR_AKKU -gt "70" ]
+    then
+        AKKU="$(echo -e "\uf240") $CURR_AKKU %"
+    fi
+
+
+
+
     DATE="$(echo -e "\uf133") $(date +"%d.%m.%Y")"
     TIME="$(echo -e "\uf017") $(date "+%R")"
 
